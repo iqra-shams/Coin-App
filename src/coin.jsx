@@ -6,9 +6,9 @@ const Coin = (props) => {
     
  return(
   <div > 
-  <card  className="tablet:bg-black mobile:bg-red-800 my-8 py-10 hover:w-[94%] flex  justify-center grow hover:grow-0 w-[90%] h-[90%] mx-auto text-center font-medium rounded-xl flex items-center text-white">
-   <div className=''>
-    <img className="w-10  " src={props.icon}/>
+  <card  className="tablet:bg-black mobile:bg-red-800 m-5  w-96 h-40 flex justify-center items-center    text-center font-small rounded-xl text-white transition all 0.3s ease  hover:scale-110 ">
+   <div className='flex flex-col items-center '>
+    <img className="w-8  " src={props.icon}/>
    Name: {props.name} <br></br>
    Symbol: {props.symbol}<br></br>
    Price: {props.price}<br></br>

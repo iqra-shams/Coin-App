@@ -45,11 +45,11 @@ const filteredCoins = records.filter((coin)=> {
     <>
    
   
-    <div className="bg-black text-white font-bold text-3xl flex justify-evenly py-5">
-      <div><h1 className='text-white '>List of Coin</h1></div> 
+    <div className="bg-black h-6   text-2xl flex justify-evenly items-center py-5">
+      <div><h1 className='text-white font-lg '>List of Coin</h1></div> 
       <input
         type="text"
-        className=" h-8 font-normal text-base rounded-full px-3 w-80 tablet:w-150"
+        className=" h-5 font-normal text-base rounded-full px-3 w-60 "
         placeholder="Search coin..."
         value={searchWord}
         onChange={(e) => {
@@ -60,7 +60,7 @@ const filteredCoins = records.filter((coin)=> {
     
      
     </div>
-    <div className="my-5  tablet:grid grid-cols-2  ">
+    <div className="mt-5  flex justify-center flex-wrap">
     { filteredCoins.slice().map((data,i)=>{
       return(
          <Coin key={i} icon={data.icon} name={data.name}  symbol={data.symbol} price={data.price} />
@@ -69,20 +69,20 @@ const filteredCoins = records.filter((coin)=> {
   }
   
     </div>
-   <nav >
-    <ul className='pagination flex flex-row justify-center gap-4'>
-      <li className='page-item'>
+   <nav className='my-20 py-10'>
+    <ul className='pagination flex flex-row justify-center text-black gap-4  '>
+      <li className='border-2 border-[#AE8625] bg-black text-white w-10 flex justify-center'>
         <a href='#' className='page-link' onClick={perpage}>Prev</a>
       </li>
       {
 
         numbers.map((n,i)=>(
-          <li className={`page-item ${currentpage=== n? 'active' : ''}  `} key={i}>
+          <li className={`bg-white w-7 h-7 border-2 border-[#AE8625] flex justify-center  ${currentpage=== n? 'active' : ''}  `} key={i}>
             <a href='#' className='page-link' onClick={()=>changeCpage(n)}>{n}</a>
           </li>
         ))
       }
-      <li className='page-item'>
+      <li className='border-2 border-[#AE8625] bg-black text-white w-10 flex justify-center'>
         <a href='#' className='page-link' onClick={nextpage}>Next</a>
       </li>
     </ul>
