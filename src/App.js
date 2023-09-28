@@ -3,11 +3,13 @@ import React,{ useEffect }  from 'react';
 import axios from 'axios';
 import './App.css';
 import { useState } from 'react';
+import Loader from './assets/my-loader.svg';
 
 function App() {
+
   const [coindata,setCoindata]= useState([]);
   const [searchWord, setSearchWord] = useState("");
-  
+  const[loading,setLoading]= useState(true);
 
   const [currentpage, setCurrentpage]=useState(1);
   const recordsperpage = 6;
@@ -19,23 +21,13 @@ function App() {
   useEffect(()=>{
 
     axios.get("https://api.coinstats.app/public/v1/coins ").then((response)=>{
-  
-     setCoindata(response.data.coins);
-  
-    console.log(response.data.coins);
-    // console.log({srhcoin},"fdfgd");
-     
-    })
+      setLoading(false);
+     setCoindata(response.data.coins)
+    
+    });
    
-    },[])
-    // const filterdata = (e) => {
-    //   setUpdateddata(e.target.value);
-    // const result = coindata.filter(data =>
-    //   data.name === updateddata,);
-
-    // console.log(result, "rtyrty");
-    // }
-
+   console.log(loading);
+    },[]);
 
 const filteredCoins = records.filter((coin)=> {
     return coin.name.toLowerCase().includes(searchWord.toLowerCase());
@@ -60,16 +52,23 @@ const filteredCoins = records.filter((coin)=> {
     
      
     </div>
-    <div className="mt-5  flex justify-center flex-wrap">
-    { filteredCoins.slice().map((data,i)=>{
+
+
+   <div className="mt-5  flex justify-center flex-wrap">
+  {filteredCoins.slice().map((data,i)=>{
       return(
          <Coin key={i} icon={data.icon} name={data.name}  symbol={data.symbol} price={data.price} />
       )
-    })
-  }
+    })}
   
-    </div>
-   <nav className='my-20 py-10'>
+    </div> 
+    {/* pagination */}
+  <div>
+    
+    {loading? 
+   <div className='flex justify-center'> <img  src={Loader} alt='loader' /></div> :
+    <nav className='my-20 py-10'>
+
     <ul className='pagination flex flex-row justify-center text-black gap-4  '>
       <li className='border-2 border-[#AE8625] bg-black text-white w-10 flex justify-center'>
         <a href='#' className='page-link' onClick={perpage}>Prev</a>
@@ -86,8 +85,10 @@ const filteredCoins = records.filter((coin)=> {
         <a href='#' className='page-link' onClick={nextpage}>Next</a>
       </li>
     </ul>
-   </nav>
+   </nav> }
    
+   
+   </div>
    
     </>
   )
@@ -104,7 +105,8 @@ function nextpage(){
     setCurrentpage(currentpage+1)
   }
  
-}
+} 
+
 }
 
 export default App;
